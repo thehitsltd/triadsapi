@@ -25,6 +25,49 @@ class PostController extends Controller
         }
     }
 
+    public function view($videoId)
+    {
+        try {
+            $video = Video::with('user')->whereId($videoId)->first();
+            if ($video) {
+                Video::with('user')->whereId($videoId)->update(['video_popularity', '0.01']);
+                return response([
+                    'message' => 'success',
+                    'video' => $video
+                ]);
+            } else {
+                return response([
+                    'message' => 'Not found'
+                ], 400);
+            }
+        } catch (\Exception $e) {
+            return response([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function like($videoId)
+    {
+        try {
+            $video = Video::with('user')->whereId($videoId)->first();
+            if ($video) {
+                Video::with('user')->whereId($videoId)->update(['video_popularity', '0.01']);
+                return response([
+                    'message' => 'success',
+                ]);
+            } else {
+                return response([
+                    'message' => 'Not found'
+                ], 400);
+            }
+        } catch (\Exception $e) {
+            return response([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
     public function store(VideoRequest $videoRequest)
     {
         try {

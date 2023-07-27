@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('videos', [PostController::class, 'index']);
     Route::post('video/upload', [PostController::class, 'store']);
     Route::post('user/follow/{user_id}', [UserRelationShipController::class, 'followandunfollow']);
+    Route::get('video/{video_id}', [PostController::class, 'view']);
+    Route::get('video/like/{video_id}', [PostController::class, 'like']);
 });
 
 Route::post('register', [AuthenticationController::class, 'register'])->middleware('res');
