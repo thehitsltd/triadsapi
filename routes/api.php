@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticationController;
+use App\Http\Controllers\Triad\PostController;
+use App\Http\Controllers\Triad\UserRelationShipController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('videos', [PostController::class, 'index']);
+    Route::post('video/upload', [PostController::class, 'store']);
+    Route::post('user/follow/{user_id}', [UserRelationShipController::class, 'followandunfollow']);
 });
 
 Route::post('register', [AuthenticationController::class, 'register'])->middleware('res');
