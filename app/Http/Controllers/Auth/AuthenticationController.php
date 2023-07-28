@@ -53,6 +53,7 @@ class AuthenticationController extends Controller
                 ], 500);
             }
         } catch (\Exception $e) {
+            DB::rollBack();
             return response([
                 'message' => $e->getMessage()
             ], 500);

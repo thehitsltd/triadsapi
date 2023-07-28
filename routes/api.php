@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticationController;
 use App\Http\Controllers\Triad\PostController;
+use App\Http\Controllers\Triad\RoomController;
 use App\Http\Controllers\Triad\UserRelationShipController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('user/follow/{user_id}', [UserRelationShipController::class, 'followandunfollow']);
     Route::get('video/{video_id}', [PostController::class, 'view']);
     Route::get('video/like/{video_id}', [PostController::class, 'like']);
+    Route::post('create/challenge/room', [RoomController::class, 'store']);
+    Route::get('rooms', [RoomController::class, 'index']);
 });
 
 Route::post('register', [AuthenticationController::class, 'register'])->middleware('res');
