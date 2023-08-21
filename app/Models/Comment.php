@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Profile extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'firstname',
-        'lastname',
-        'address',
-        'city',
-        'state',
-        'zipcode',
-        'country',
-        'user_id'
+        'user_id',
+        'video_id',
+        'content'
     ];
+
+    public function video(): BelongsTo
+    {
+        return $this->belongsTo(Video::class);
+    }
 
     public function user(): BelongsTo
     {

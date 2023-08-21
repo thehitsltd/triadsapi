@@ -24,7 +24,7 @@ class UserRelationShipController extends Controller
                 ]);
             } else {
                 $rel = UserRelationship::whereUserId(auth()->id())
-                    ->whereRelatedUserId($userId)->update(['type' => 0]);
+                    ->whereRelatedUserId($userId)->delete();
                 return response([
                     'status' => true
                 ]);

@@ -23,10 +23,7 @@ class VideoRequest extends FormRequest
     {
         return [
             'description' => 'required|string',
-            'src' => 'required|mimes:mp4',
-            'hashtags' => 'required|string',
-            'categories' => 'required|string',
-            'mentions' => 'required',
+            'src' => 'required|mimetypes:video/*|max:100000',
         ];
     }
 }

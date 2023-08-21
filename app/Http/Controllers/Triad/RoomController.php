@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Triad;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomRequest;
+use App\Http\Resources\RoomResource;
 use App\Models\Room;
 use App\Models\Rule;
 use Illuminate\Http\Request;
@@ -54,10 +55,11 @@ class RoomController extends Controller
     public function index()
     {
         try {
-            $rooms = Room::with('rules')->latest()->get();
+            $rooms = Room::with('user')->with('rules')->latest()->get();
+            $rooms = RoomResource::collection($rooms);
             return response([
                 'rooms' => $rooms
-            ]);
+            ], 200);
         } catch (\Exception $e) {
             return response([
                 'message' => $e->getMessage(),
